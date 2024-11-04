@@ -1,0 +1,113 @@
+/* En proceso de formación */
+
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#margenAlto {
+  background-color: rgb(2, 124, 194);
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0.1rem 0.1rem 1rem black;
+}
+
+#txtmarcoAlto {
+  color: white;
+  display: flex;
+  margin-left: 13px;
+  margin-top: 30px;
+  font-size: 25px;
+}
+
+#txtInicio {
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-left: 13px;
+  margin-top: -42px;
+  font-size: 30px;
+}
+
+#CuadroPrincipal {
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  width: 300px;
+  height: 200px;
+  background-color: hwb(208 38% 0%);
+  display: flex;               
+  flex-direction: column;      
+  justify-content: center;     
+}
+
+#txtCuadroPrincipal{
+margin-top: -20px;
+
+}
+
+#CuadroDeTransferencias{
+    font-size: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+    color: white;
+    width: 400px;
+    height: 550px;
+    background-color: hwb(208 38% 0%);
+
+}
+
+#CuadroDeTransferencias:hover{
+
+box-shadow: 4px 4px 3px black;
+
+}
+
+#AccionesDelCuadroPrincipal {
+  display: flex;              
+  flex-direction: row;        
+  margin-left: 10px;
+  justify-content: center;
+  
+}
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e6e2e2;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+#detalleActividad{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: grab;
+  font-size: 20px;
+  background-color: #298cce;
+}
