@@ -109,5 +109,8 @@ button:active {
   gap: 1rem;
   cursor: grab;
   font-size: 20px;
-  background-color: #298cce;
+}
+
+.tarjeta-transaccion {
+ background-color: #298cce
 }
