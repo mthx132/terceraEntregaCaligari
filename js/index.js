@@ -48,12 +48,12 @@ let intentos = 6;
         localStorage.setItem("contrasenia", JSON.stringify(contrasenia));
       }}
 
-      function inicializarSaldo(){}
+      function inicializarSaldo(){
       let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
       if (!saldo) {
         saldo = 80000;
         localStorage.setItem("saldo", JSON.stringify(saldo));
-      }
+      }}
       
       let saldoTexto = document.getElementById("txtCuadroPrincipal");
       if (saldoTexto) {
