@@ -5,10 +5,7 @@ let contrasenia
 let transacciones = [];
 let botonEnviarDinero = document.getElementById("enviarDinero");
 let intentos = 6;
-//informacion del dolar
-  fetch("https://dolarapi.com/v1/dolares/oficial")
-  .then(response => response.json())
-  .then(data => console.log(data));
+let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
 
 //se recopila toda la información y se coloca en el cuadro de "Tu Ultima Actividad"
       function registrarTransaccion(tipoTransaccion, nombreTransaccion, cantidadTransaccion) {
@@ -67,7 +64,6 @@ let intentos = 6;
       
         if (cantidad <= saldo) {
           if (validarContrasenia(transferencia, cantidad)) {
-            let fechaActual = new Date().toLocaleString();
             saldo = saldo - cantidad;
             localStorage.setItem("saldo", JSON.stringify(saldo));
             saldoTexto.textContent = `$${saldo}`;
@@ -107,15 +103,14 @@ let intentos = 6;
       }
 
       //función para recibir Dinero
-      recibirDinero.onclick = function () {
-       recibirDinero = document.getElementById("recibirDinero");
+      botonRecibirDinero.onclick = function () {
+       botonRecibirDinero = document.getElementById("botonRecibirDinero");
         let recibirNombre = prompt("Nombre de la cuenta a extraer el dinero");
         let recibirCantidad = parseInt(prompt("Cantidad a recibir"));
         if (recibirNombre !== "" && recibirCantidad > 0 && validarContrasenia(recibirNombre, recibirCantidad)) {
           saldo = saldo + recibirCantidad;
           saldoTexto.textContent = `$${saldo}`;
           localStorage.setItem("saldo", JSON.stringify(saldo));
-          let fechaActual = new Date().toLocaleString();
           registrarTransaccion("Ingreso", recibirNombre, recibirCantidad);
           alert("¡¡Extracción exitosa!!");
         } else {
