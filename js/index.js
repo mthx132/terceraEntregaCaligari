@@ -1,32 +1,46 @@
-//declaro variables
+// Declaración de variables
 let nombre = localStorage.getItem("nombre");
 let nombreTextoHtml = document.getElementById("txtmarcoAlto");
-let contrasenia
-let transacciones = [];
+let contrasenia;
+let transacciones = JSON.parse(localStorage.getItem("historialTransferencias")) || [];
 let botonEnviarDinero = document.getElementById("enviarDinero");
+let botonRecibirDinero = document.getElementById("botonRecibirDinero");
 let intentos = 6;
 let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
+let detalleActividad = document.getElementById("detalleActividad");
 
-//se recopila toda la información y se coloca en el cuadro de "Tu Ultima Actividad"
-      function registrarTransaccion(tipoTransaccion, nombreTransaccion, cantidadTransaccion) {
-        let detalleActividad = document.getElementById("detalleActividad");
-        transacciones.push(({
-          nombre: nombre,
-          contrasenia: contrasenia,
-          saldo: saldo,
-          destinatario: nombreTransaccion,
-          cantidad: cantidadTransaccion,
-          tipoTransaccion: tipoTransaccion,
-        }));
-        let informacionTransaccion = `
-        <div class="tarjeta-transaccion">
-          Nombre del transferido: ${nombreTransaccion}<br>
-          Cantidad: $${cantidadTransaccion}<br>
-          Tipo de Transacción: ${tipoTransaccion}<br>
-          Fecha: ${new Date().toLocaleString()}
-        </div>`;
-        detalleActividad.innerHTML += informacionTransaccion;
-      };
+// Mostrar historial inicial si es que existe
+transacciones.forEach((transaccion) => {
+  detalleActividad.innerHTML += generarTarjetaHTML(transaccion);
+});
+
+// Función para registrar una transacción
+function registrarTransaccion(tipoTransaccion, nombreTransaccion, cantidadTransaccion) {
+  const nuevaTransaccion = {
+    destinatario: nombreTransaccion,
+    cantidad: cantidadTransaccion,
+    tipoTransaccion: tipoTransaccion,
+    fecha: new Date().toLocaleString(),
+  };
+
+  // Guardar la transacción en el historial
+  transacciones.push(nuevaTransaccion);
+  localStorage.setItem("historialTransferencias", JSON.stringify(transacciones));
+
+  // Mostrar la transacción en la interfaz
+  detalleActividad.innerHTML += generarTarjetaHTML(nuevaTransaccion);
+}
+
+// Función para generar el HTML de una tarjeta de transacción
+function generarTarjetaHTML(transaccion) {
+  return `
+    <div class="tarjeta-transaccion">
+      Nombre del transferido: ${transaccion.destinatario}<br>
+      Cantidad: $${transaccion.cantidad}<br>
+      Tipo de Transacción: ${transaccion.tipoTransaccion}<br>
+      Fecha: ${transaccion.fecha}
+    </div>`;
+}
 
       //Almaceno información en el LocalStorage y texto visual
       function mostrarMensajeBienvenida(){
@@ -46,9 +60,7 @@ let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
       }}
 
       function inicializarSaldo(){
-      let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
       if (!saldo) {
-        saldo = 80000;
         localStorage.setItem("saldo", JSON.stringify(saldo));
       }}
       
